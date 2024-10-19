@@ -22,7 +22,7 @@ private:
 
 public:
     SanPham();
-    SanPham(string tenSanPham, string moTa, string danhMuc);
+    SanPham(const string& tenSanPham, const string& moTa, int danhMucIndex);
     
     void nhap();
     void xuat();
@@ -35,7 +35,7 @@ public:
 
     void setTenSanPham(const string& tenSanPham);
     void setMoTa(const string& moTa);
-    void setDanhMuc(const string& danhMuc);
+    void setDanhMuc(int danhMucIndex);
     void setSoLuong(int soLuong);  
 
     static void initListDanhMuc(); 
@@ -55,22 +55,32 @@ SanPham::SanPham() : soLuong(0) {
     this->danhMuc = "";
 }
 
-SanPham::SanPham(string tenSanPham, string moTa, string danhMuc) : soLuong(0) {
+SanPham::SanPham(const string& tenSanPham, const string& moTa, int danhMucIndex) 
+    : soLuong(0) {
+    initListDanhMuc();
     stringstream ss;
     ss << setw(5) << setfill('0') << soSanPham++;
     this->maSanPham = "SP" + ss.str();
     this->tenSanPham = tenSanPham;
     this->moTa = moTa;
-    this->danhMuc = danhMuc;
+
+    if (danhMucIndex >= 1 && danhMucIndex <= listDanhMuc.size()) {
+        this->danhMuc = listDanhMuc[danhMucIndex - 1];
+    } else {
+        this->danhMuc = "";
+    }
 }
 
 void SanPham::initListDanhMuc() {
+    listDanhMuc.clear();
     listDanhMuc.push_back("Dien thoai");
     listDanhMuc.push_back("May tinh");
     listDanhMuc.push_back("Phu kien");
 }
 
 void SanPham::nhap() {
+    initListDanhMuc();
+    fflush(stdin);
     cout << "Nhap ten san pham: ";
     getline(cin, this->tenSanPham);
     cout << "Nhap mo ta: ";
@@ -126,8 +136,12 @@ void SanPham::setMoTa(const string& moTa) {
     this->moTa = moTa;
 }
 
-void SanPham::setDanhMuc(const string& danhMuc) {
-    this->danhMuc = danhMuc;
+void SanPham::setDanhMuc(int danhMucIndex) {
+    if (danhMucIndex >= 1 && danhMucIndex <= listDanhMuc.size()) {
+        this->danhMuc = listDanhMuc[danhMucIndex - 1];
+    } else {
+        this->danhMuc = "";
+    }
 }
 
 void SanPham::setSoLuong(int soLuong) {

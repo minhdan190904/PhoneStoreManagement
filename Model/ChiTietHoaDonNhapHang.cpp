@@ -23,6 +23,7 @@ public:
     SanPham getSanPham();
     int getSoLuong();
     double getGiaNhap();
+    void setSanPham(SanPham sanpham);
 };
 
 ChiTietHoaDonNhapHang::ChiTietHoaDonNhapHang() : soLuong(0), giaNhap(0.0) {}
@@ -31,7 +32,6 @@ ChiTietHoaDonNhapHang::ChiTietHoaDonNhapHang(SanPham sp, int sl, double gia)
     : sanPham(sp), soLuong(sl), giaNhap(gia) {}
 
 void ChiTietHoaDonNhapHang::nhap() {
-    sanPham.nhap(); 
     cout << "Nhap so luong: ";
     cin >> soLuong;
 
@@ -65,6 +65,10 @@ int ChiTietHoaDonNhapHang::getSoLuong() {
 
 double ChiTietHoaDonNhapHang::getGiaNhap() {
     return giaNhap;
+}
+
+void ChiTietHoaDonNhapHang::setSanPham(SanPham sanpham) {
+    sanPham = sanpham;
 }
 
 #endif

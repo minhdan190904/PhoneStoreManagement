@@ -28,6 +28,10 @@ public:
     void xuat();
     string getMaHoaDon();
     double getTongTien();
+    vector<ChiTietHoaDonNhapHang> getDanhSachChiTiet();
+    NhaCungCap getNhaCungCap();
+    void setNhaCungCap(NhaCungCap nhaCungCap);
+    void setDanhSachChiTiet(vector<ChiTietHoaDonNhapHang> danhSachChiTiet);
     ~HoaDonNhapHang();
 };
 
@@ -55,17 +59,6 @@ HoaDonNhapHang::HoaDonNhapHang(const string& ngayNhap, const NhaCungCap& nhaCung
 void HoaDonNhapHang::nhap() {
     cout << "Nhap ngay nhap (dd/mm/yyyy): ";
     getline(cin, this->ngayNhap);
-    nhaCungCap.nhap();
-    int soSanPham;
-    cout << "Nhap so san pham: ";
-    cin >> soSanPham;
-    cin.ignore();
-    for (int i = 0; i < soSanPham; ++i) {
-        ChiTietHoaDonNhapHang chiTiet;
-        chiTiet.nhap();
-        danhSachChiTiet.push_back(chiTiet);
-        tongTien += chiTiet.getThanhTien();
-    }
 }
 
 void HoaDonNhapHang::xuat() {
@@ -86,6 +79,22 @@ string HoaDonNhapHang::getMaHoaDon() {
 
 double HoaDonNhapHang::getTongTien() {
     return this->tongTien;
+}
+
+NhaCungCap HoaDonNhapHang::getNhaCungCap() {
+    return this->nhaCungCap;
+}
+
+void HoaDonNhapHang::setNhaCungCap(NhaCungCap nhaCungCap) {
+    this->nhaCungCap = nhaCungCap;
+}
+
+vector<ChiTietHoaDonNhapHang> HoaDonNhapHang::getDanhSachChiTiet() {
+    return this->danhSachChiTiet;
+}
+
+void HoaDonNhapHang::setDanhSachChiTiet(vector<ChiTietHoaDonNhapHang> danhSachChiTiet) {
+    this->danhSachChiTiet = danhSachChiTiet;
 }
 
 HoaDonNhapHang::~HoaDonNhapHang() {
